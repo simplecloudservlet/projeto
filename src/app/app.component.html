@@ -28,11 +28,38 @@
  -->
 </ul>
 
-
-<p></p>
-<p></p>
-<!-- <button type="button" (click)="cadastrar()">Modal: Cadastrar Cidade Visitada</button>
-
+<!-- Aqui muda a variavel exibir-->
+<button type="button" (click)="cadastrar()">Modal: Cadastrar Cidade Visitada</button>
 <p>Exibir janela modal: {{this.exibir}}</p>
--->
+
+
+<div id="painel_servicos" [hidden]="!filho.mostrarComplemento" 
+[class.yellow]="filho.mostrarComplemento">
+  <p>#p1: &#64;Input e &#64;Output entre [app.component] e [primeiro-componente]:</p>
+<!-- [Property binding]: usado pelo @Input: pai envia para o filho-->
+<!-- (Event binding): usado pelo @Output: filho envia para o pai-->
+<!-- #filho eh uma variavel de template para acessar o objeto filho (Exemplo no button acima)-->
+<!-- [valor] estah no filho [primeiro-componente] (@Input)
+     [this.exibir] estah no pai [app.component]
+     (tarefa) estah no filho [primeiro-componente] (@Output)
+     quando [this.exibir] muda no pai, filho faz '@Output tarefa' e dispara o evento da janela modal -->
+
+<app-primeiro-componente
+  #filho
+  #p1
+  [menuText]="'pai [app.component] -> preenche no filho [primeiro-componente]'"
+  [valor]="this.exibir"
+  [valorNovo]="'abc'"
+  (tarefa)="this.onTarefaEvent($event)"></app-primeiro-componente>
+
+
+</div> 
+<!-- #filho variavel de template foi declarada antes. -->
+<button type="button" (click)="filho.mostrar()">Mostrar &#64;Input e &#64;Output {{filho.mostrarComplemento}}</button>
+<p></p>
+<p></p>
+
+
+<!-- <p>Exibir janela modal: {{this.exibir}}</p> -->
+
 <app-segundo-componente></app-segundo-componente>

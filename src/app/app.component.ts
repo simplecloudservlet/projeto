@@ -23,9 +23,18 @@ import { SegundoComponenteComponent } from './segundo-componente/segundo-compone
 })
 export class AppComponent implements AfterViewInit, OnInit {
 
+  title = 'projeto';
+
   /*Para o Materialize*/
   /*ViewChild: pai acessa o component filho dentro da classe */
   @ViewChild('mobile') sideNav?: ElementRef;
+
+  /*ViewChild: pai acessa o component filho dentro da classe */
+  @ViewChild('p1') p1!: PrimeiroComponenteComponent;
+  @ViewChild('p2') p2!: PrimeiroComponenteComponent;
+
+  /*Altera a variavel do botao*/
+  exibir=false;
 
   ngOnInit(): void {
     //throw new Error('Method not implemented.');
@@ -33,5 +42,22 @@ export class AppComponent implements AfterViewInit, OnInit {
   ngAfterViewInit(): void {
     M.Sidenav.init(this.sideNav?.nativeElement);
   }
-  title = 'projeto';
+ 
+//pai invoca este metodo quando o filho emite um evento no metodo 'ngOnChanges'
+onTarefaEvent(event: boolean) {
+  //this.modal.show = event;
+  //this.modal.title = 'Janela Modal';
+  //this.modal.text = 'Controle de Cidades Visitadas';
+  window.alert('Evento ativado');
+  console.log('Evento ativado');
+
+}
+
+public cadastrar(): void{
+  if(this.exibir==true)
+    this.exibir=false;
+  else
+    this.exibir=true;
+}
+
 }
